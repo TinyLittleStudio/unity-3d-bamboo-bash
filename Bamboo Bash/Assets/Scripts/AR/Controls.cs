@@ -2,9 +2,13 @@
 
 public class Controls : MonoBehaviour
 {
-    public GameObject obj;
+    [SerializeField] private GameObject target;
 
     private Transform cameraContainer;
+
+    private float velocity = 5.0f;
+
+    private Vector3 destination = Vector3.zero;
 
     private void Start()
     {
@@ -20,9 +24,15 @@ public class Controls : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
-            if(obj != null && hit.transform.tag != "No Raycast Target") {
-                obj.transform.position = hit.point;
+            if(target != null && hit.transform.tag != "Player") {
+                destination = hit.point;
+            } else {
+                destination = Vector3.zero;
             }
+        }
+
+        if(destination != Vector3.zero) { 
+            target.transform.position = Vector3.MoveTowards(target.transform.position, destination, velocity * Time.deltaTime);
         }
     }
 }

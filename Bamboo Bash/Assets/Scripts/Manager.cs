@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using System.Collections;
+using TinyLittleStudio.BambooBash.Utils;
 
 public class Manager : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class Manager : MonoBehaviour
             Destroy(this);
         }
         StartScreen.SetActive(true);
+
+        SceneUtils.RequestTransition(new Transition(TransitionType.FADE_IN));
     }
 
     private void Start()
@@ -50,7 +53,7 @@ public class Manager : MonoBehaviour
 
     private IEnumerator Late()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1);
 
         OnProfileChange();
     }
