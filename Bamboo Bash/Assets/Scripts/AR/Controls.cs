@@ -9,30 +9,35 @@ public class Controls : MonoBehaviour
     private bool gyroEnabled;
     private Gyroscope gyro;
 
-    private GameObject cameraContainer;
-    private Quaternion rot;
+    public GameObject obj;
+
+    private Quaternion rotation;
+
+    private Transform cameraContainer;
 
     private void Start()
     {
-        cameraContainer = new GameObject("Camera Container");
-        cameraContainer.transform.position = transform.position;
-        transform.SetParent(cameraContainer.transform);
+        cameraContainer = Camera.main.transform;
+        transform.SetParent(cameraContainer);
+        transform.rotation = cameraContainer.rotation;
+        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane));
 
-        gyroEnabled = EnableGyro();
+        gyroEnabled = EnableGyro(); 
     }
 
     private bool EnableGyro()
     {
-        if (SystemInfo.supportsGyroscope)
+        /*if (SystemInfo.supportsGyroscope)
         {
             gyro = Input.gyro;
             gyro.enabled = true;
 
-            cameraContainer.transform.rotation = Quaternion.Euler(90f, 90f, 0f);
-            rot = new Quaternion(0, 0, 1, 0);
+            cameraContainer.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            rotation = new Quaternion(0, 0, 1, 0);
 
             return true;
         }
+        */
         return false;
     }
 
@@ -40,7 +45,7 @@ public class Controls : MonoBehaviour
     {
         if (gyroEnabled)
         {
-            transform.localRotation = gyro.attitude * rot;
+            transform.localRotation = gyro.attitude * rotation;
         }
 
         RaycastHit hit;
@@ -48,7 +53,11 @@ public class Controls : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            text.text = hit.transform.name;
+            text.text =Camera.main.transform.rotation + ", " + hit.transform.name + ", " + hit.point;
+
+            if(obj != null && hit.transform.tag != "No Raycast Target") {
+                obj.transform.position = hit.point;
+            }
         }
         else
         {
