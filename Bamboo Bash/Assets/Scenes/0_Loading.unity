@@ -320,8 +320,7 @@ MonoBehaviour:
   hint: {fileID: 773920930}
   hints:
   - Wenn du dies lesen kannst, dann hat der Entwickler etwas vergessen!
-  - Bamboo Bash!
-  - Ich habe keine Ahnung was ich hier mache...
+  - "Dieser Satz ist absolut kein L\xFCckenf\xFCller!"
 --- !u!1 &229561771
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,8 +609,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 3036676095
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.7058824}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -957,8 +956,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1353000146}
   m_LocalRotation: {x: -0, y: -0, z: 0.0000000037252903, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00064995995}
-  m_LocalScale: {x: 1.0001488, y: 1.0001488, z: 1.0001488}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2040166376}
   m_RootOrder: 1
@@ -978,8 +977,8 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations:
-  - {fileID: 7400000, guid: 208e7ef1efa42894682d49eb548f345a, type: 2}
-  - {fileID: 7400000, guid: 18e8d2f3e7a90f946987cf5562604433, type: 2}
+  - {fileID: 7400000, guid: d6921a6886d77c74383c75a52bc4423a, type: 2}
+  - {fileID: 7400000, guid: 3351a8f6e6db413469baa33decb61872, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -996,7 +995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1303,7 +1302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8509804, g: 0.28627452, b: 0.28627452, a: 1}
+  m_Color: {r: 1, g: 0.4198113, b: 0.4198113, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

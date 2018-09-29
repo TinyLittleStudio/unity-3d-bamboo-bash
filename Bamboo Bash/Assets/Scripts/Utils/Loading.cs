@@ -102,8 +102,6 @@ namespace TinyLittleStudio.BambooBash.Utils
                 }
                 Notification.CancelAll();
 
-                SceneManager.SetActiveScene(scene);
-
                 yield return null;
             }
 

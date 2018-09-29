@@ -3,146 +3,154 @@ using TMPro;
 using System.Collections;
 using TinyLittleStudio.BambooBash.Utils;
 using Vuforia;
+using TinyLittleStudio.BambooBash.Content;
+using System;
 
-public class Manager : MonoBehaviour
+namespace TinyLittleStudio
 {
-    private static Manager defaultInstance;
-
-    [Header("Profiles")]
-    [SerializeField] private Profile[] data;
-
-    [Header("Profiles UI")]
-    [SerializeField] private TextMeshProUGUI label;
-    [SerializeField] private Transform preview;
-
-    [Header("Screens")]
-    [SerializeField] private GameObject startScreen;
-    [SerializeField] private GameObject endScreen;
-
-    private GameObject previewGameObject;
-
-    private int index = 0;
-
-    private void Awake()
+    public class Manager : MonoBehaviour
     {
-        if (defaultInstance == null)
+        private static Manager defaultInstance;
+
+        [Header("Profiles")]
+        [SerializeField] private Profile[] data;
+
+        [Header("Profiles UI")]
+        [SerializeField] private TextMeshProUGUI nameLabel;
+        [SerializeField] private TextMeshProUGUI descriptionLabel;
+        [SerializeField] private Transform preview;
+
+        [Header("Screens")]
+        [SerializeField] private GameObject startScreen;
+        [SerializeField] private GameObject endScreen;
+
+        [SerializeField] private Character template;
+
+        private GameObject previewGameObject;
+
+        private int index = 0;
+
+        private void Awake()
         {
-            defaultInstance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-        DisableAR();
+            if (defaultInstance != null)
+            {
+                throw new Exception("Multiple Manager-Scripts Found!");
+            }
+            DisableAR();
 
-        StartScreen.SetActive(true);
+            StartScreen.SetActive(true);
+            EndScreen.SetActive(false);
 
-        Change(0);
+            Change(0);
 
-        SceneUtils.RequestTransition(new Transition(TransitionType.FADE_IN));
-    }
+            StartCoroutine(Late());
 
-    private void Start()
-    {
-        StartCoroutine(Late());
-    }
-
-    private void Update()
-    {
-
-        if (previewGameObject != null)
-        {
-            previewGameObject.transform.Rotate(new Vector3(0, 1, 0), 0.5f);
-        }
-    }
-
-    private IEnumerator Late()
-    {
-        yield return new WaitForSeconds(0.75f);
-
-        OnProfileChange();
-    }
-
-    private void OnProfileChange()
-    {
-        CurrentProfile = data[index];
-
-        if (label != null)
-        {
-            label.text = CurrentProfile.Name;
+            SceneUtils.RequestTransition(new Transition(TransitionType.FADE_IN));
         }
 
-        if (preview != null)
+        private void Update()
         {
-            Clear();
-
-            previewGameObject = Instantiate(CurrentProfile.Prefab, preview);
-
             if (previewGameObject != null)
             {
-                previewGameObject.transform.SetParent(preview);
-                previewGameObject.transform.localScale = new Vector3(1, 1, 1);
-                previewGameObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5.0f;
+                previewGameObject.transform.Rotate(new Vector3(0.2f, 1.0f, 0.2f), 0.5f);
             }
         }
-    }
 
-    public void Clear()
-    {
-        if (previewGameObject != null)
+        private IEnumerator Late()
         {
-            Destroy(previewGameObject);
+            yield return new WaitForSeconds(0.5f);
+
+            OnProfileChange();
         }
-    }
 
-    public void Next()
-    {
-        index++;
-
-        if (index > data.Length - 1)
+        private void OnProfileChange()
         {
-            index = 0;
+            CurrentProfile = data[index];
+
+            if (nameLabel != null)
+            {
+                nameLabel.text = CurrentProfile.Name;
+            }
+
+            if (descriptionLabel != null)
+            {
+                descriptionLabel.text = CurrentProfile.Description;
+            }
+
+            if (preview != null)
+            {
+                Clear();
+
+                previewGameObject = Instantiate(CurrentProfile.Prefab, preview);
+
+                if (previewGameObject != null)
+                {
+                    previewGameObject.transform.SetParent(preview);
+                    previewGameObject.transform.localScale = new Vector3(1, 1, 1);
+                    previewGameObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5.0f;
+                }
+            }
         }
-        OnProfileChange();
-    }
 
-    public void Prev()
-    {
-        index--;
-
-        if (index < 0)
+        public void Clear()
         {
-            index = data.Length - 1;
+            if (previewGameObject != null)
+            {
+                Destroy(previewGameObject);
+            }
         }
-        OnProfileChange();
-    }
 
-    public void Change(int index)
-    {
-        if (index > -1 && index < data.Length - 1)
+        public void Next()
         {
-            this.index = index;
+            index++;
+
+            if (index > data.Length - 1)
+            {
+                index = 0;
+            }
+            OnProfileChange();
         }
-        OnProfileChange();
+
+        public void Prev()
+        {
+            index--;
+
+            if (index < 0)
+            {
+                index = data.Length - 1;
+            }
+            OnProfileChange();
+        }
+
+        public void Change(int index)
+        {
+            if (index > -1 && index < data.Length - 1)
+            {
+                this.index = index;
+            }
+            OnProfileChange();
+        }
+
+        public void DisableAR()
+        {
+            VuforiaBehaviour.Instance.enabled = false;
+        }
+
+        public void EnableAR()
+        {
+            VuforiaBehaviour.Instance.enabled = true;
+        }
+
+        public Profile CurrentProfile { get; private set; }
+
+        public string Username { get; set; }
+
+        public GameObject StartScreen => startScreen;
+
+        public GameObject EndScreen => endScreen;
+
+        public Character Template => template;
+
+        public static Manager DefaultInstance => Manager.defaultInstance;
     }
-
-    public void DisableAR()
-    {
-        VuforiaBehaviour.Instance.enabled = false;
-    }
-
-    public void EnableAR()
-    {
-        VuforiaBehaviour.Instance.enabled = true;
-    }
-
-    public Profile CurrentProfile { get; private set; }
-
-    public string Username { get; set; }
-
-    public GameObject StartScreen => startScreen;
-
-    public GameObject EndScreen => endScreen;
-
-    public static Manager DefaultInstance => Manager.defaultInstance;
 }

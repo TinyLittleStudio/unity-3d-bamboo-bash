@@ -16,6 +16,11 @@
             public static readonly string GAME = "2_Game";
         }
 
+        public static class Tags
+        {
+            public static readonly string PLAYER = "Player";
+        }
+
         private static readonly Configuration DEFAULT = new Configuration();
 
         private Configuration()
