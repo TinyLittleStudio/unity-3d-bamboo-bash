@@ -2,6 +2,7 @@
 using TMPro;
 using System.Collections;
 using TinyLittleStudio.BambooBash.Utils;
+using Vuforia;
 
 public class Manager : MonoBehaviour
 {
@@ -32,7 +33,11 @@ public class Manager : MonoBehaviour
         {
             Destroy(this);
         }
+        DisableAR();
+
         StartScreen.SetActive(true);
+
+        Change(0);
 
         SceneUtils.RequestTransition(new Transition(TransitionType.FADE_IN));
     }
@@ -53,7 +58,7 @@ public class Manager : MonoBehaviour
 
     private IEnumerator Late()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.75f);
 
         OnProfileChange();
     }
@@ -119,6 +124,16 @@ public class Manager : MonoBehaviour
             this.index = index;
         }
         OnProfileChange();
+    }
+
+    public void DisableAR()
+    {
+        VuforiaBehaviour.Instance.enabled = false;
+    }
+
+    public void EnableAR()
+    {
+        VuforiaBehaviour.Instance.enabled = true;
     }
 
     public Profile CurrentProfile { get; private set; }

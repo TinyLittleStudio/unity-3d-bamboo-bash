@@ -2,7 +2,7 @@
 
 public class Controls : MonoBehaviour
 {
-    [SerializeField] private GameObject target;
+    private GameObject target;
 
     private Transform cameraContainer;
 
@@ -24,7 +24,15 @@ public class Controls : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
-            if(target != null && hit.transform.tag != "Player") {
+            if(hit.transform.tag != "Player")
+            {
+                if (target == null)
+                {
+                    target = GameObject.FindGameObjectWithTag("Player");
+                    GameObject model = Instantiate(Manager.DefaultInstance.CurrentProfile.Prefab, destination, Quaternion.identity);
+                    model.transform.SetParent(target.transform);
+                    Debug.Log(target);
+                }
                 destination = hit.point;
             } else {
                 destination = Vector3.zero;
