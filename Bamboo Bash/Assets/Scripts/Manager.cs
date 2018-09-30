@@ -5,6 +5,7 @@ using TinyLittleStudio.BambooBash.Utils;
 using Vuforia;
 using TinyLittleStudio.BambooBash.Content;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace TinyLittleStudio
 {
@@ -14,7 +15,6 @@ namespace TinyLittleStudio
 
         [Header("Collections")]
         [SerializeField] private Profile[] data;
-        [SerializeField] private Projectile[] projectiles;
 
         [Header("Profiles UI")]
         [SerializeField] private TextMeshProUGUI nameLabel;
@@ -24,6 +24,7 @@ namespace TinyLittleStudio
         [Header("Screens")]
         [SerializeField] private GameObject startScreen;
         [SerializeField] private GameObject endScreen;
+        [SerializeField] private GameObject contentScene;
 
         [SerializeField] private Character template;
 
@@ -103,6 +104,11 @@ namespace TinyLittleStudio
             }
         }
 
+        public void Reset()
+        {
+            Application.LoadLevel(Application.loadedLevel);
+        }
+
         public void Next()
         {
             index++;
@@ -152,9 +158,9 @@ namespace TinyLittleStudio
 
         public GameObject EndScreen => endScreen;
 
-        public Character Template => template;
+        public GameObject GeneralScene => contentScene;
 
-        public Projectile[] Projectiles => projectiles;
+        public Character Template => template;
 
         public static Manager DefaultInstance => Manager.defaultInstance;
     }

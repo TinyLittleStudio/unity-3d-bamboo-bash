@@ -15,6 +15,8 @@ namespace TinyLittleStudio.BambooBash.Utils
         private void Awake()
         {
             Magnitude = 60;
+
+            DontDestroyOnLoad(this);
         }
 
         private void Update()
@@ -129,7 +131,7 @@ namespace TinyLittleStudio.BambooBash.Utils
                 taps = 0;
             }
         }
-        
+
         public int Magnitude { get; set; }
 
         public bool IsLeft => isLeft;

@@ -13,9 +13,6 @@ namespace TinyLittleStudio.BambooBash.Content
         [SerializeField] private GameObject modelTarget;
         [SerializeField] private GameObject healthBar;
 
-        [Space(10)]
-        [SerializeField] private float rate, next;
-
         private bool isInitialized = false;
 
         private void Awake()
@@ -28,27 +25,23 @@ namespace TinyLittleStudio.BambooBash.Content
 
         private void Update()
         {
-            if (TouchUtils.Gestures.IsUp)
+            if (TouchUtils.Gestures.IsLeft)
             {
-                if (Time.time > next)
-                {
-                    Projectile projectile = Profile.Projectile;
-
-                    if (projectile != null)
-                    {
-                        Instantiate(projectile, target.transform.position + target.transform.forward, target.transform.rotation);
-                    }
-                    next = Time.time + rate;
-                }
+                Spawn(PrimitiveType.Cube);
             }
 
-            if (TouchUtils.Gestures.IsLeft || TouchUtils.Gestures.IsRight)
+            if (TouchUtils.Gestures.IsRight)
+            {
+                Spawn(PrimitiveType.Sphere);
+            }
+
+            if (TouchUtils.Gestures.IsDoubleTap)
             {
                 Notification.Notify("Du hast dir selbst Schaden zugefügt?", Notification.Level.WARNING);
                 Damage(10.0f);
             }
 
-            if (TouchUtils.Gestures.IsDoubleTap)
+            if (TouchUtils.Gestures.IsDown)
             {
                 Notification.Notify("Du bist gestorben!", Notification.Level.ERROR);
                 Die();
@@ -63,6 +56,20 @@ namespace TinyLittleStudio.BambooBash.Content
                 healthBar.transform.localScale = new Vector3(length, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
                 healthBar.transform.LookAt(Camera.main.transform.position);
             }
+        }
+
+        private GameObject Spawn(PrimitiveType primitiveType)
+        {
+            GameObject gameObject = GameObject.CreatePrimitive(primitiveType);
+            gameObject.AddComponent<Rigidbody>();
+            gameObject.AddComponent<BoxCollider>();
+
+            gameObject.transform.SetParent(Manager.DefaultInstance.GeneralScene.transform);
+            gameObject.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 10.0f, target.transform.position.z);
+            gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+            gameObject.GetComponent<Renderer>().material.color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            return gameObject;
         }
 
         public void OnProfileChange()
@@ -89,13 +96,12 @@ namespace TinyLittleStudio.BambooBash.Content
 
         public void Die()
         {
-            Manager.DefaultInstance.DisableAR();
-
-            Destroy(this.gameObject);
-
-            Debug.Log("Destroy: " + this.gameObject);
-
             Manager.DefaultInstance.EndScreen.SetActive(true);
+
+            if (Manager.DefaultInstance.GeneralScene != null)
+            {
+                Destroy(Manager.DefaultInstance.GeneralScene);
+            }
         }
 
         public float CurrentHealth { get; set; }

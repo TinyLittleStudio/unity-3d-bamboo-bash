@@ -19,8 +19,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4187278065676266}
-  - component: {fileID: 54389925581944788}
-  - component: {fileID: 114037389992839988}
   m_Layer: 0
   m_Name: Butterfly
   m_TagString: Untagged
@@ -52,8 +50,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1737461088523226}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75018454, y: -23.145708, z: 3.8868332}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 4327276436826258}
   m_Father: {fileID: 0}
@@ -87,7 +85,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 9bcfe6e61a0d7a64c97ee025b525eb36, type: 3}
+  - {fileID: 2100000, guid: ec7cbfb61308ce045baf5a159e3907b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,31 +112,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1802137150098116}
   m_Mesh: {fileID: 4300000, guid: 9bcfe6e61a0d7a64c97ee025b525eb36, type: 3}
---- !u!54 &54389925581944788
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1737461088523226}
-  serializedVersion: 2
-  m_Mass: 2.25
-  m_Drag: 0.78
-  m_AngularDrag: 0.84
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &114037389992839988
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1737461088523226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e353b8e72100cd40ac6dfcce815829f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 10
-  velocity: 10

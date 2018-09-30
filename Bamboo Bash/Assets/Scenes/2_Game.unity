@@ -297,22 +297,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - name: Bonsai
-    description: "Der Bonsai besitzt keine nat\xFCrlichen Feinde."
+    description: "Der Bonsai besitzt keine nat\xFCrlichen Feinde!"
     health: 100
-    projectile: 
     prefab: {fileID: 1942085278502938, guid: 4a2a88dba2cddbe498430bbecd16d432, type: 2}
   - name: Excalibur
-    description: Ein Stock in einem Stein.
+    description: Ein Stock in einem Stein!
     health: 100
-    projectile: 
     prefab: {fileID: 1274842219164960, guid: eb3b4db70dca17b4bbbb9e027ca5298d, type: 2}
-  projectiles:
-  - {fileID: 114793272792652462, guid: 8093de9ec99e17040a4fc61c4061a4d3, type: 2}
+  - name: Muskete
+    description: Peng Peng!
+    health: 100
+    prefab: {fileID: 1278635604716940, guid: 631de1ddbbb87f84a800b838273897cc, type: 2}
+  - name: Messer
+    description: Ein scharfes nicht ganz sauberes Messer!
+    health: 100
+    prefab: {fileID: 1737461088523226, guid: f3958d736bb52a1469afd94fb6161879, type: 2}
   nameLabel: {fileID: 1334142156}
   descriptionLabel: {fileID: 320295494}
   preview: {fileID: 1340469873}
   startScreen: {fileID: 262109057}
   endScreen: {fileID: 1026416724}
+  contentScene: {fileID: 899397611}
   template: {fileID: 114015713840903910, guid: 6c64299a27ebb3c4b9c088f26cc67233, type: 2}
 --- !u!4 &148540243
 Transform:
@@ -2200,7 +2205,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: -128}
+  m_AnchoredPosition: {x: -0.000061035156, y: -128}
   m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1334142156
@@ -3092,30 +3097,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1026416724}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 1_Loading
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 262109057}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 148540242}
-        m_MethodName: EnableAR
+        m_MethodName: Reset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3123,7 +3106,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null

@@ -45,14 +45,23 @@ namespace TinyLittleStudio.BambooBash.Content
                 {
                     Character character = Instantiate(Manager.DefaultInstance.Template.gameObject, Destination, Quaternion.identity).GetComponent<Character>();
 
-                    if (character != null)
+                    if (character != null && character.gameObject != null)
                     {
+                        Debug.Log("profile calls");
                         character.Profile = Manager.DefaultInstance.CurrentProfile;
                         character.OnProfileChange();
 
-                        character.gameObject.transform.position = raycastHit.point;
+                        if (Manager.DefaultInstance.GeneralScene != null)
+                        {
+                            character.gameObject.transform.SetParent(Manager.DefaultInstance.GeneralScene.transform);
+                            character.gameObject.transform.position = raycastHit.point;
 
-                        target = character.gameObject;
+                            target = character.gameObject;
+                        }
+                        else
+                        {
+                            Destroy(character.gameObject);
+                        }
                     }
                 }
                 Destination = raycastHit.point;
