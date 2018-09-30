@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667564, g: 0.48427147, b: 0.56452364, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -298,19 +298,15 @@ MonoBehaviour:
   data:
   - name: Bonsai
     description: "Der Bonsai besitzt keine nat\xFCrlichen Feinde!"
-    health: 100
     prefab: {fileID: 1942085278502938, guid: 4a2a88dba2cddbe498430bbecd16d432, type: 2}
   - name: Excalibur
     description: Ein Stock in einem Stein!
-    health: 100
     prefab: {fileID: 1274842219164960, guid: eb3b4db70dca17b4bbbb9e027ca5298d, type: 2}
   - name: Muskete
     description: Peng Peng!
-    health: 100
     prefab: {fileID: 1278635604716940, guid: 631de1ddbbb87f84a800b838273897cc, type: 2}
   - name: Messer
     description: Ein scharfes nicht ganz sauberes Messer!
-    health: 100
     prefab: {fileID: 1737461088523226, guid: f3958d736bb52a1469afd94fb6161879, type: 2}
   nameLabel: {fileID: 1334142156}
   descriptionLabel: {fileID: 320295494}
@@ -318,7 +314,7 @@ MonoBehaviour:
   startScreen: {fileID: 262109057}
   endScreen: {fileID: 1026416724}
   contentScene: {fileID: 899397611}
-  template: {fileID: 114015713840903910, guid: 6c64299a27ebb3c4b9c088f26cc67233, type: 2}
+  template: {fileID: 114101590212147516, guid: 6c64299a27ebb3c4b9c088f26cc67233, type: 2}
 --- !u!4 &148540243
 Transform:
   m_ObjectHideFlags: 0
