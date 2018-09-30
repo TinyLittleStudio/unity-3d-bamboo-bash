@@ -1,4 +1,5 @@
 ﻿using System;
+using TinyLittleStudio.BambooBash.Utils;
 using UnityEngine;
 
 namespace TinyLittleStudio.BambooBash.Content
@@ -12,6 +13,9 @@ namespace TinyLittleStudio.BambooBash.Content
         [SerializeField] private GameObject modelTarget;
         [SerializeField] private GameObject healthBar;
 
+        [Space(10)]
+        [SerializeField] private float rate, next;
+
         private bool isInitialized = false;
 
         private void Awake()
@@ -24,6 +28,32 @@ namespace TinyLittleStudio.BambooBash.Content
 
         private void Update()
         {
+            if (TouchUtils.Gestures.IsUp)
+            {
+                if (Time.time > next)
+                {
+                    Projectile projectile = Profile.Projectile;
+
+                    if (projectile != null)
+                    {
+                        Instantiate(projectile, target.transform.position + target.transform.forward, target.transform.rotation);
+                    }
+                    next = Time.time + rate;
+                }
+            }
+
+            if (TouchUtils.Gestures.IsLeft || TouchUtils.Gestures.IsRight)
+            {
+                Notification.Notify("Du hast dir selbst Schaden zugefügt?", Notification.Level.WARNING);
+                Damage(10.0f);
+            }
+
+            if (TouchUtils.Gestures.IsDoubleTap)
+            {
+                Notification.Notify("Du bist gestorben!", Notification.Level.ERROR);
+                Die();
+            }
+
             CurrentHealth = Mathf.Clamp(CurrentHealth, MinHealth, MaxHealth);
 
             if (healthBar != null)
@@ -61,9 +91,11 @@ namespace TinyLittleStudio.BambooBash.Content
         {
             Manager.DefaultInstance.DisableAR();
 
-            Manager.DefaultInstance.EndScreen.SetActive(true);
+            Destroy(this.gameObject);
 
-            Destroy(target);
+            Debug.Log("Destroy: " + this.gameObject);
+
+            Manager.DefaultInstance.EndScreen.SetActive(true);
         }
 
         public float CurrentHealth { get; set; }

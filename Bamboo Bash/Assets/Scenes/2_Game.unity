@@ -299,11 +299,15 @@ MonoBehaviour:
   - name: Bonsai
     description: "Der Bonsai besitzt keine nat\xFCrlichen Feinde."
     health: 100
+    projectile: 
     prefab: {fileID: 1942085278502938, guid: 4a2a88dba2cddbe498430bbecd16d432, type: 2}
   - name: Excalibur
     description: Ein Stock in einem Stein.
     health: 100
+    projectile: 
     prefab: {fileID: 1274842219164960, guid: eb3b4db70dca17b4bbbb9e027ca5298d, type: 2}
+  projectiles:
+  - {fileID: 114793272792652462, guid: 8093de9ec99e17040a4fc61c4061a4d3, type: 2}
   nameLabel: {fileID: 1334142156}
   descriptionLabel: {fileID: 320295494}
   preview: {fileID: 1340469873}
@@ -1511,7 +1515,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.27058825, g: 0.6313726, b: 0.38431373, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}

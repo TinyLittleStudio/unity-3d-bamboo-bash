@@ -9,7 +9,7 @@ namespace TinyLittleStudio.BambooBash.Content
             Configuration.Tags.PLAYER,
         };
 
-        public static readonly float VELOCITY = 40.5f;
+        public static readonly float VELOCITY = 4.5f;
 
         private GameObject target;
 
@@ -41,7 +41,7 @@ namespace TinyLittleStudio.BambooBash.Content
                     return;
                 }
 
-                if (target == null && Manager.DefaultInstance.Template != null)
+                if (target == null && Manager.DefaultInstance != null && Manager.DefaultInstance.Template != null)
                 {
                     Character character = Instantiate(Manager.DefaultInstance.Template.gameObject, Destination, Quaternion.identity).GetComponent<Character>();
 
@@ -49,6 +49,8 @@ namespace TinyLittleStudio.BambooBash.Content
                     {
                         character.Profile = Manager.DefaultInstance.CurrentProfile;
                         character.OnProfileChange();
+
+                        character.gameObject.transform.position = raycastHit.point;
 
                         target = character.gameObject;
                     }

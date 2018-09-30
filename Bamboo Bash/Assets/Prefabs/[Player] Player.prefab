@@ -170,6 +170,8 @@ MonoBehaviour:
   target: {fileID: 1614787517138330}
   modelTarget: {fileID: 1845500329136316}
   healthBar: {fileID: 1417304200907972}
+  rate: 5
+  next: 0.1
 --- !u!136 &136912959484144700
 CapsuleCollider:
   m_ObjectHideFlags: 1

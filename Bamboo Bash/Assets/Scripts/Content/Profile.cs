@@ -1,4 +1,5 @@
 ﻿using System;
+using TinyLittleStudio;
 using UnityEngine;
 
 [Serializable]
@@ -11,6 +12,8 @@ public class Profile
     [SerializeField] private string description;
 
     [SerializeField] private float health;
+
+    [SerializeField] private string projectile;
 
     [Header("Misc")]
     [SerializeField] private GameObject prefab;
@@ -37,6 +40,21 @@ public class Profile
     public float Health => health;
 
     public GameObject Prefab => prefab;
+
+    public Projectile Projectile
+    {
+        get
+        {
+            foreach (Projectile projectile in Manager.DefaultInstance.Projectiles)
+            {
+                if (projectile.name == this.projectile)
+                {
+                    return projectile;
+                }
+            }
+            return null;
+        }
+    }
 
     public override string ToString()
     {

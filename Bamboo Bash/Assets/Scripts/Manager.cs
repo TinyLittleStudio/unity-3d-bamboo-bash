@@ -12,8 +12,9 @@ namespace TinyLittleStudio
     {
         private static Manager defaultInstance;
 
-        [Header("Profiles")]
+        [Header("Collections")]
         [SerializeField] private Profile[] data;
+        [SerializeField] private Projectile[] projectiles;
 
         [Header("Profiles UI")]
         [SerializeField] private TextMeshProUGUI nameLabel;
@@ -36,6 +37,8 @@ namespace TinyLittleStudio
             {
                 throw new Exception("Multiple Manager-Scripts Found!");
             }
+            defaultInstance = this;
+
             DisableAR();
 
             StartScreen.SetActive(true);
@@ -150,6 +153,8 @@ namespace TinyLittleStudio
         public GameObject EndScreen => endScreen;
 
         public Character Template => template;
+
+        public Projectile[] Projectiles => projectiles;
 
         public static Manager DefaultInstance => Manager.defaultInstance;
     }
